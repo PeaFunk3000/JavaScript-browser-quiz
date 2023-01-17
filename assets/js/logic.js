@@ -32,6 +32,21 @@ function startQuiz () {
 }
 
 // Func to getQuestion - create choice buttons, call questionClick onclick
+function getQuestion() {
+
+    var currentQuestion = questions[quizIndex];
+    var questionTitle = document.getElementById("question-title");
+    questionTitle.textContent = currentQuestion.title;
+    questionsE.removeAttribute('class');
+
+    currentQuestion.choices.forEach(function(choice, i) {
+        var choiceBtn = document.createElement('button');
+        choiceBtn.setAttribute('class', 'choices');
+        choiceBtn.setAttribute('value', choice);
+        choiceBtn.textContent = i + 1 + ". " + choice;
+        choicesE.appendChild(choiceBtn);
+    
+    })}
 
 // Func for questionClick - display Correct/Incorrect on selection, increment to next Question, reduce timer if incorrect
 
