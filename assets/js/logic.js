@@ -65,11 +65,17 @@ function questionClick(selection) {
         sfxIncorrect.play();
         timerCount = timerCount - 10;
     }
-    // quizIndex ++;
-    // getQuestion();
-}
+    if (timerCount <= 0) {
+        clearInterval(timerID);
+        quizEnd();
+    } else {
+        quizIndex++;
+        getQuestion();
+}}
 
 // Func to quizEnd - stop timer, show end screen
+
+// Func for clockTimer - invoked in startQuiz, call quizEnd if runs to 0
 function clockTimer() {
     timerCount--;
     timerE.textContent = timerCount;
@@ -77,8 +83,6 @@ function clockTimer() {
         quizEnd();
     }
 };
-
-// Func for clockTimer - invoked in startQuiz, call quizEnd if runs to 0
 
 // Func to save highScore - record user data
 
