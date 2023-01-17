@@ -36,6 +36,13 @@ function startQuiz () {
 // Func for questionClick - display Correct/Incorrect on selection, increment to next Question, reduce timer if incorrect
 
 // Func to quizEnd - stop timer, show end screen
+function clockTimer () {
+    timerCount --;
+    timerE.textContent = timerCount; 
+    if (timerCount === 0) {
+        quizEnd();
+      }
+    };
 
 // Func for clockTimer - invoked in startQuiz, call quizEnd if runs to 0
 
