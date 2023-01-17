@@ -105,5 +105,10 @@ function clockTimer() {
     }
 };
 
-// Func to save highScore - record user data
+// Func to save score on submit - record user data
+function recordUser() {
+    var initials = initialScoreE.value;
+    localStorage.setItem(initials, score);
+    window.location.href = "./highscores.html";
+}
 
