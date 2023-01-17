@@ -60,7 +60,7 @@ function questionClick(selection) {
     // console.log inspection yields selection.target.attributes[1].nodeValue as selection value from questions.js
     if (selection.target.attributes[1].nodeValue == questions[quizIndex].answer) {
         feedbackE.setAttribute('class', 'feedback');
-        setTimeout(function() {
+        setTimeout(function () {
             feedbackE.setAttribute('class', 'hide');
         }, 1000);
         score = score + 1;
@@ -68,7 +68,7 @@ function questionClick(selection) {
         sfxCorrect.play();
     } else {
         giveFeedback = feedbackE.setAttribute('class', 'feedback');
-        setTimeout(function() {
+        setTimeout(function () {
             feedbackE.setAttribute('class', 'hide');
         }, 1000);
         feedbackE.textContent = "INCORRECT (-10 s)";
@@ -112,7 +112,13 @@ function clockTimer() {
 // Func to save score on submit - record user data, setItem in localstorage
 function recordUser() {
     var initials = initialScoreE.value;
-    localStorage.setItem(initials, score);
-    window.location.href = "./highscores.html";
+    if (!initials) {
+        alert("Initials cannot be blank")
+    } else if (initials.length >= 3) {
+        alert("You cannot enter more than 3 characters for your initials")
+    } else {
+        localStorage.setItem(initials, score);
+        window.location.href = "./highscores.html";
+    }
 }
 
