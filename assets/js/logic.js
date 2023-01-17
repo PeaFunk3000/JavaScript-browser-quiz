@@ -44,11 +44,16 @@ function getQuestion() {
         choiceBtn.setAttribute('class', 'choices');
         choiceBtn.setAttribute('value', choice);
         choiceBtn.textContent = i + 1 + ". " + choice;
+        choiceBtn.onclick = questionClick;
         choicesE.appendChild(choiceBtn);
     
     })}
 
 // Func for questionClick - display Correct/Incorrect on selection, increment to next Question, reduce timer if incorrect
+function questionClick (selection) {
+    console.log(selection);
+// console.log inspection yields selection.target.attributes[1].nodeValue as selection value from questions.js
+}
 
 // Func to quizEnd - stop timer, show end screen
 function clockTimer () {
