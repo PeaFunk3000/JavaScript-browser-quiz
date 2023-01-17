@@ -60,7 +60,7 @@ function questionClick(selection) {
         feedbackE.textContent = "CORRECT";
         sfxCorrect.play();
     } else {
-        feedbackE.setAttribute('class', 'feedback');
+        giveFeedback = feedbackE.setAttribute('class', 'feedback');
         feedbackE.textContent = "INCORRECT, 10 SECONDS LOST";
         sfxIncorrect.play();
         timerCount = timerCount - 10;
@@ -70,10 +70,23 @@ function questionClick(selection) {
         quizEnd();
     } else {
         quizIndex++;
-        getQuestion();
-}}
+        if (quizIndex >= questions.length) {
+            quizEnd();
+        } else {
+            getQuestion();
+        }
+    }
+}
 
 // Func to quizEnd - stop timer, show end screen
+function quizEnd() {
+    clearInterval(timerID);
+    feedbackE.setAttribute('class', 'hide');
+    questionsE.setAttribute('class', 'hide');
+    endScreen.removeAttribute('class');
+    finalScoreE.textContent = finalScoreE.textContent + score;
+
+}
 
 // Func for clockTimer - invoked in startQuiz, call quizEnd if runs to 0
 function clockTimer() {
