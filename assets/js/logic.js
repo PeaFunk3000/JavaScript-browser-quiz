@@ -54,8 +54,19 @@ function getQuestion() {
 function questionClick(selection) {
     console.log(selection);
     // console.log inspection yields selection.target.attributes[1].nodeValue as selection value from questions.js
-    quizIndex ++;
-    getQuestion();
+    if (selection.target.attributes[1].nodeValue == questions[quizIndex].answer) {
+        feedbackE.setAttribute('class', 'feedback');
+        score = score + 1;
+        feedbackE.textContent = "CORRECT";
+        sfxCorrect.play();
+    } else {
+        feedbackE.setAttribute('class', 'feedback');
+        feedbackE.textContent = "INCORRECT, 10 SECONDS LOST";
+        sfxIncorrect.play();
+        timerCount = timerCount - 10;
+    }
+    // quizIndex ++;
+    // getQuestion();
 }
 
 // Func to quizEnd - stop timer, show end screen
