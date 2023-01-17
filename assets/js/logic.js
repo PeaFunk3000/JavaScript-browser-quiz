@@ -19,10 +19,10 @@ var score = 0;
 var sfxCorrect = new Audio('./assets/sfx/correct.wav');
 var sfxIncorrect = new Audio('./assets/sfx/incorrect.wav');
 
-startGame.addEventListener("click", (startQuiz)); 
+startGame.addEventListener("click", (startQuiz));
 
 // Func to startQuiz - start timer calling clockTimer in setInterval, show first question calling getQuestion
-function startQuiz () {
+function startQuiz() {
     score = 0;
     quizIndex = 0;
     timerE.textContent = timerCount;
@@ -33,36 +33,39 @@ function startQuiz () {
 
 // Func to getQuestion - create choice buttons, call questionClick onclick
 function getQuestion() {
-
+    choicesE.innerHTML = '';
     var currentQuestion = questions[quizIndex];
     var questionTitle = document.getElementById("question-title");
     questionTitle.textContent = currentQuestion.title;
     questionsE.removeAttribute('class');
 
-    currentQuestion.choices.forEach(function(choice, i) {
+    currentQuestion.choices.forEach(function (choice, i) {
         var choiceBtn = document.createElement('button');
         choiceBtn.setAttribute('class', 'choices');
         choiceBtn.setAttribute('value', choice);
         choiceBtn.textContent = i + 1 + ". " + choice;
         choiceBtn.onclick = questionClick;
         choicesE.appendChild(choiceBtn);
-    
-    })}
+
+    })
+}
 
 // Func for questionClick - display Correct/Incorrect on selection, increment to next Question, reduce timer if incorrect
-function questionClick (selection) {
+function questionClick(selection) {
     console.log(selection);
-// console.log inspection yields selection.target.attributes[1].nodeValue as selection value from questions.js
+    // console.log inspection yields selection.target.attributes[1].nodeValue as selection value from questions.js
+    quizIndex ++;
+    getQuestion();
 }
 
 // Func to quizEnd - stop timer, show end screen
-function clockTimer () {
-    timerCount --;
-    timerE.textContent = timerCount; 
+function clockTimer() {
+    timerCount--;
+    timerE.textContent = timerCount;
     if (timerCount === 0) {
         quizEnd();
-      }
-    };
+    }
+};
 
 // Func for clockTimer - invoked in startQuiz, call quizEnd if runs to 0
 
