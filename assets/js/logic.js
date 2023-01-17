@@ -1,4 +1,4 @@
-var startGame = document.querySelector('#start');
+var startGameBtn = document.querySelector('#start');
 var timerE = document.querySelector('.timer');
 var startScreenE = document.querySelector('#start-screen');
 var endScreen = document.querySelector('#end-screen');
@@ -6,7 +6,7 @@ var finalScoreE = document.querySelector('#final-score');
 var initialScoreE = document.querySelector('#initials');
 var questionsE = document.querySelector('#questions');
 var choicesE = document.querySelector('#choices');
-var submitE = document.querySelector('#submit');
+var submitBtn = document.querySelector('#submit');
 var feedbackE = document.querySelector('#feedback');
 
 
@@ -19,7 +19,9 @@ var score = 0;
 var sfxCorrect = new Audio('./assets/sfx/correct.wav');
 var sfxIncorrect = new Audio('./assets/sfx/incorrect.wav');
 
-startGame.addEventListener("click", (startQuiz));
+// addEventListeners for startGame and Submit buttons on click to call startQuiz and recordUser funcs
+startGameBtn.addEventListener("click", (startQuiz));
+submitBtn.addEventListener("click", (recordUser));
 
 // Func to startQuiz - start timer calling clockTimer in setInterval, show first question calling getQuestion
 function startQuiz() {
@@ -33,17 +35,19 @@ function startQuiz() {
 
 // Func to getQuestion - create choice buttons, call questionClick onclick
 function getQuestion() {
+    // clear innerHTML before getting
     choicesE.innerHTML = '';
     var currentQuestion = questions[quizIndex];
     var questionTitle = document.getElementById("question-title");
     questionTitle.textContent = currentQuestion.title;
     questionsE.removeAttribute('class');
-
+    // foreEach to create choices as buttons
     currentQuestion.choices.forEach(function (choice, i) {
         var choiceBtn = document.createElement('button');
         choiceBtn.setAttribute('class', 'choices');
         choiceBtn.setAttribute('value', choice);
         choiceBtn.textContent = i + 1 + ". " + choice;
+        // onclick to call questionClick func when answer choice selected
         choiceBtn.onclick = questionClick;
         choicesE.appendChild(choiceBtn);
 
@@ -105,7 +109,7 @@ function clockTimer() {
     }
 };
 
-// Func to save score on submit - record user data
+// Func to save score on submit - record user data, setItem in localstorage
 function recordUser() {
     var initials = initialScoreE.value;
     localStorage.setItem(initials, score);
