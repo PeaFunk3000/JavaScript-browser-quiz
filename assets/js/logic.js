@@ -1,5 +1,6 @@
 var startGame = document.querySelector('#start');
 var timerE = document.querySelector('.timer');
+var startScreenE = document.querySelector('#start-screen');
 var endScreen = document.querySelector('#end-screen');
 var finalScoreE = document.querySelector('#final-score');
 var initialScoreE = document.querySelector('#initials');
@@ -18,12 +19,13 @@ var score = 0;
 var sfxCorrect = new Audio('./assets/sfx/correct.wav');
 var sfxIncorrect = new Audio('./assets/sfx/incorrect.wav');
 
+startGame.addEventListener("click", (startQuiz)); 
+
 // Func to startQuiz - start timer calling clockTimer in setInterval, show first question calling getQuestion
 function startQuiz () {
     score = 0;
     quizIndex = 0;
     timerE.textContent = timerCount;
-    var startScreenE = document.querySelector('#start-screen');
     startScreenE.setAttribute('class', 'hide');
     timerID = setInterval(clockTimer, 1000);
     getQuestion();
