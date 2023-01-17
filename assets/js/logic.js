@@ -19,6 +19,15 @@ var sfxCorrect = new Audio('./assets/sfx/correct.wav');
 var sfxIncorrect = new Audio('./assets/sfx/incorrect.wav');
 
 // Func to startQuiz - start timer calling clockTimer in setInterval, show first question calling getQuestion
+function startQuiz () {
+    score = 0;
+    quizIndex = 0;
+    timerE.textContent = timerCount;
+    var startScreenE = document.querySelector('#start-screen');
+    startScreenE.setAttribute('class', 'hide');
+    timerID = setInterval(clockTimer, 1000);
+    getQuestion();
+}
 
 // Func to getQuestion - create choice buttons, call questionClick onclick
 
